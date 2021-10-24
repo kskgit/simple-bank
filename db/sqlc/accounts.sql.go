@@ -23,7 +23,7 @@ type CreateAuthorParams struct {
 	Owner    string
 	Balance  int64
 	Currency string
-
+}
 
 func (q *Queries) CreateAuthor(ctx context.Context, arg CreateAuthorParams) (Account, error) {
 	row := q.db.QueryRowContext(ctx, createAuthor, arg.Owner, arg.Balance, arg.Currency)
