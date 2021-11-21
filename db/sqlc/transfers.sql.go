@@ -109,27 +109,18 @@ func (q *Queries) ListTransfers(ctx context.Context, arg ListTransfersParams) ([
 const updateTransfer = `-- name: UpdateTransfer :one
 UPDATE transfers
 SET 
-from_account_id = $2,
-to_account_id = $3,
-amount = $4
+amount = $2
 WHERE id = $1
 RETURNING id, from_account_id, to_account_id, amount, created_at
 `
 
 type UpdateTransferParams struct {
-	ID            int64
-	FromAccountID int64
-	ToAccountID   int64
-	Amount        int64
+	ID     int64
+	Amount int64
 }
 
 func (q *Queries) UpdateTransfer(ctx context.Context, arg UpdateTransferParams) (Transfer, error) {
-	row := q.db.QueryRowContext(ctx, updateTransfer,
-		arg.ID,
-		arg.FromAccountID,
-		arg.ToAccountID,
-		arg.Amount,
-	)
+	row := q.db.QueryRowContext(ctx, updateTransfer, arg.ID, arg.Amount)
 	var i Transfer
 	err := row.Scan(
 		&i.ID,

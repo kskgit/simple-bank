@@ -53,8 +53,8 @@ func TestUpdateTransfer(t *testing.T) {
 	account1 := createRandomTransfer(t)
 
 	arg := UpdateTransferParams{
-		ID:          account1.ID,
-		ToAccountID: util.RandomMoney(),
+		ID:     account1.ID,
+		Amount: util.RandomMoney(),
 	}
 
 	account2, err := testQueries.UpdateTransfer(context.Background(), arg)
@@ -63,8 +63,8 @@ func TestUpdateTransfer(t *testing.T) {
 
 	require.Equal(t, account1.ID, account2.ID)
 	require.Equal(t, account1.FromAccountID, account2.FromAccountID)
-	require.Equal(t, arg.ToAccountID, account2.ToAccountID)
-	require.Equal(t, account1.Amount, account2.Amount)
+	require.Equal(t, account1.ToAccountID, account2.ToAccountID)
+	require.Equal(t, arg.Amount, account2.Amount)
 	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 }
 
