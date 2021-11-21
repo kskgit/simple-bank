@@ -34,11 +34,16 @@ func RandomOwner() string {
 	return RandomString(6)
 }
 
-func RnadomMoney() int64 {
+func RandomMoney() int64 {
 	return RundomInt(0, 1000)
 }
+
 func RandomCurrency() string {
 	currencies := []string{"EUR", "USD", "CAD"}
 	n := len(currencies)
 	return currencies[rand.Intn(n)]
 }
+
+// func RandomId() int64 {
+// 	return RundomInt(1, 100)
+// }
