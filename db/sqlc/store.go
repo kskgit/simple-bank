@@ -70,7 +70,6 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		if err != nil {
 			return err
 		}
-		return nil
 
 		result.ToEntry, err = q.CreateEntrie(ctx, CreateEntrieParams{
 			AccountID: arg.ToAccountID,
