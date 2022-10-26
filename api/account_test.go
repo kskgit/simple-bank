@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -16,6 +17,31 @@ import (
 	"github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 )
+
+type eqCreateUserParamsMatcher struct {
+	arg      db.CreateUserParams
+	password string
+}
+
+func (e eqCreateUserParamsMatcher) Matches(x interface{}) bool {
+	arg, ok := x.(db.CreateUserParams)
+	if !ok {
+		return false
+	}
+
+	err := util.CheckPassword(e.password, arg.HashedPassword)
+	if err != nil {
+		return false
+	}
+
+	e.arg.HashedPassword = arg.HashedPassword
+	return reflect.DeepEqual(e.arg, e.arg)
+
+}
+
+func (e eqCreateUserParamsMatcher) String() string {
+	return fmt.Sprintf("is equal to %v (%T)", e.x, e.x)
+}
 
 func TestGetAccountAPI(t *testing.T) {
 	account := randomAccount()
