@@ -37,7 +37,7 @@ func (e eqCreateUserParamsMatcher) Matches(x interface{}) bool {
 	}
 
 	e.arg.HashedPassword = arg.HashedPassword
-	return reflect.DeepEqual(e.arg, e.arg)
+	return reflect.DeepEqual(e.arg, arg)
 }
 
 func (e eqCreateUserParamsMatcher) String() string {
