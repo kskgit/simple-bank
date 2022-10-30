@@ -108,6 +108,7 @@ func TestCreateUserAPI(t *testing.T) {
 				require.Equal(t, http.StatusInternalServerError, recorder.Code)
 			},
 		},
+		// TODO add Validation Erro
 	}
 	for i := range testCases {
 		tc := testCases[i]
