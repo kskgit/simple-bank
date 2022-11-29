@@ -19,7 +19,7 @@ func NewPasetoMaker(symmetricKey string) (Maker, error) {
 	}
 
 	maker := &PasetoMaker{
-		paseto:       paseto.NewV2,
+		paseto:       &paseto.V2{},
 		symmetricKey: []byte(symmetricKey),
 	}
 	return maker, nil
@@ -41,7 +41,7 @@ func (maker *PasetoMaker) VerifyToken(token string) (*Payload, error) {
 		return nil, ErrInvalidToken
 	}
 
-	err := payload.Valid()
+	err = payload.Valid()
 	if err != nil {
 		return nil, err
 	}
