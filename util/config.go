@@ -11,7 +11,7 @@ type Config struct {
 	DBSource            string        `mapstructure:"DB_SORCE"`
 	ServerAddress       string        `mapstructure:"SEVER_ADDRESS"`
 	TokenSymmetricKey   string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
-	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATIO"`
+	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
 }
 
 func LoadConfig(path string) (config Config, err error) {
