@@ -1,7 +1,7 @@
 #! /bin/ash
 
 set -e
-
+source app.env
 echo "run db migration"
 /app/migrate -path /app/migration -database "$DB_SOURCE" -verbose up
 
